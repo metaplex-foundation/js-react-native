@@ -1,16 +1,18 @@
 import {NativeModules} from 'react-native';
 const {Metaplex} = NativeModules;
 
-export const findByMint = () => {
-  // devnet/mainnet/testnet | default -> mainnet
-  const environment = 'devnet';
+class MetaplexBridge {
+  constructor(environment, ownerPublicKey) {
+    // environment -> devnet/mainnet/testnet | default -> mainnet
+    // ownerPublicKey -> public key of owner wallet
+    Metaplex.create(environment, ownerPublicKey);
+  }
 
-  const ownerPublicKey = 'EAqjUWVX2m9fdfGNBzTY5zSiid1Sb9V3x6EL8ssZBTkw';
-  const mintKey = 'HfUXV9jP7qwMBKSvyoQDYEyZpPVSfteysS62DBpGNSqz';
+  findByMint(mintKey, callback) {
+    // find nft metadata for given mint key
+    // callback function returns the data returned
+    Metaplex.findByMint(mintKey, (data, error) => callback(data, error));
+  }
+}
 
-  // initializes the metaplex object for given values
-  Metaplex.create(environment, ownerPublicKey);
-
-  // find nft metadata for given mint key
-  Metaplex.findByMint(mintKey, (data, error) => console.log(data, error));
-};
+export default MetaplexBridge;
