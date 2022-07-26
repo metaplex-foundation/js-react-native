@@ -16,23 +16,37 @@ Currently bridge for following methods from Android SDK have been implemented:
    git clone https://github.com/metaplex-foundation/js-react-native
    ```
 
-2. **Import Metaplex Native Module from NativeModules**
+2. **Import Metaplex Class from Metaplex.js**
 
    ```js
-   import {NativeModules} from 'react-native';
-   const {Metaplex} = NativeModules;
+   import Metaplex from './Metaplex.js';
    ```
 
-3. **Initialize Metaplex by calling the create method**
+3. **Initialize Metaplex**
 
-    `create` method takes two arguments :
-    - `environment` : It can take three values mainnet/testnet/devnet . Default value is mainnet
-    - `ownerPublicKey` : It is the public key of owner wallet
-
+   `constructor` method takes two arguments :
+      
+   - `environment` : It can take three values mainnet/testnet/devnet . Default value is mainnet
+   
+   - `ownerPublicKey` : It is the public key of owner wallet
     ```js
-    Metaplex.create(environment, ownerPublicKey);
+    const metaplex = new Metaplex(environment, ownerPublicKey);
     ```
-    All the methods can only be used after calling `create` method.
+
+4. **Run the react native app**
+
+   - Open the `android` folder in android studio and build the app.
+
+   - Make sure android `emulator` is running with `android 12` (API 31)
+
+   - Open a terminal in the root of the project and run the metro bundler by using following command.
+     ```sh
+     npm run start
+     ```
+   - Open another terminal in the root of the project and run the below command to run react-native app for android.
+     ```sh
+     npm run android
+     ```
 
 ## Methods
 
@@ -42,10 +56,11 @@ Check out [`Metaplex.js`](./Metaplex.js) file for code samples of following meth
 
     findByMint method takes two arguments :
     - `mintKey` : It is the mint key for which nft data is to be found
+   
     - `callback` : Callback function returns nft `data` and `error` if there is any
 
     ```js
-    Metaplex.findByMint(mintKey, (data, error) => console.log(data, error));
+    metaplex.findByMint(mintKey, (data, error) => console.log(data, error));
     ```
 
 ## Next Steps

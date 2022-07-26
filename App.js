@@ -16,7 +16,6 @@ import {
   Text,
   useColorScheme,
   View,
-  NativeModules,
 } from 'react-native';
 
 import {
@@ -26,6 +25,18 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+
+import Metaplex from './Metaplex';
+
+const metaplex = new Metaplex(
+  'devnet',
+  'EAqjUWVX2m9fdfGNBzTY5zSiid1Sb9V3x6EL8ssZBTkw',
+);
+
+metaplex.findByMint(
+  'HfUXV9jP7qwMBKSvyoQDYEyZpPVSfteysS62DBpGNSqz',
+  (data, error) => console.log(data, error),
+);
 
 const Section = ({children, title}): Node => {
   const isDarkMode = useColorScheme() === 'dark';
