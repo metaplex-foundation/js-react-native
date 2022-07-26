@@ -33,6 +33,8 @@ Currently bridge for following methods from Android SDK have been implemented:
     const metaplex = new Metaplex(environment, ownerPublicKey);
     ```
 
+   Once the Metaplex class is created, you can use the methods present in [`Metaplex.js`](./Metaplex.js) file
+
 4. **Run the react native app**
 
    - Open the `android` folder in android studio and build the app.
