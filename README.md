@@ -65,6 +65,17 @@ Check out [`Metaplex.js`](./Metaplex.js) file for code samples of following meth
     metaplex.findByMint(mintKey, (data, error) => console.log(data, error));
     ```
 
+2. **findAllByOwner**
+
+    findAllByOwner method takes two arguments :
+    - `ownerPublicKey` : It is the public key of the owner for whom all NFTs are returned
+   
+    - `callback` : Callback function returns nft `data` and `error` if there is any
+
+    ```js
+    metaplex.findAllByOwner(ownerPublicKey, (data, error) => console.log(data, error));
+    ```
+
 ## Next Steps
 
 As mentioned above, this SDK is still in very early stages. We plan to bridge the complete mobile SDK of Metaplex. Here’s a quick overview of what we plan to work on next.
