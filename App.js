@@ -38,6 +38,11 @@ metaplex.findByMint(
   (data, error) => console.log(data, error),
 );
 
+metaplex.findAllByOwner(
+  'EAqjUWVX2m9fdfGNBzTY5zSiid1Sb9V3x6EL8ssZBTkw',
+  (data, error) => console.log(data, error),
+);
+
 const Section = ({children, title}): Node => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
