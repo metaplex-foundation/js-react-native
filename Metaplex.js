@@ -13,6 +13,11 @@ class MetaplexBridge {
     // callback function returns the data returned
     Metaplex.findByMint(mintKey, (data, error) => callback(data, error));
   }
+
+  findAllByOwner(ownerPublicKey, callback){
+    // find all nfts by a given owner public key
+    Metaplex.findAllByOwner(ownerPublicKey, (data, error) => callback(data, error));
+  }
 }
 
 export default MetaplexBridge;
