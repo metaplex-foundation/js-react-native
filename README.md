@@ -6,7 +6,8 @@ Provides a bridge library of ios and android metaplex native sdks.
 
 Currently bridge for following methods from Android SDK have been implemented:
 
-   - `findByMint`
+- `findByMint`
+- `findAllByOwner`
 
 ## Usage
 
@@ -25,13 +26,14 @@ Currently bridge for following methods from Android SDK have been implemented:
 3. **Initialize Metaplex**
 
    `constructor` method takes two arguments :
-      
+
    - `environment` : It can take three values mainnet/testnet/devnet . Default value is mainnet
-   
+
    - `ownerPublicKey` : It is the public key of owner wallet
-    ```js
-    const metaplex = new Metaplex(environment, ownerPublicKey);
-    ```
+
+   ```js
+   const metaplex = new Metaplex(environment, ownerPublicKey);
+   ```
 
    Once the Metaplex class is created, you can use the methods present in [Metaplex.js](./Metaplex.js) file
 
@@ -56,29 +58,33 @@ Check out [`Metaplex.js`](./Metaplex.js) file for code samples of following meth
 
 1. **findByMint**
 
-    findByMint method takes two arguments :
-    - `mintKey` : It is the mint key for which nft data is to be found
-   
-    - `callback` : Callback function returns nft `data` and `error` if there is any
+   findByMint method takes one argument and returns a promise :
 
-    ```js
-    metaplex.findByMint(mintKey, (data, error) => console.log(data, error));
-    ```
+   - `mintKey` : It is the mint key for which nft data is to be found
+
+   ```js
+   metaplex
+     .findByMint(mintKey)
+     .then(data => console.log(data))
+     .catch(error => console.log(error));
+   ```
 
 2. **findAllByOwner**
 
-    findAllByOwner method takes two arguments :
-    - `ownerPublicKey` : It is the public key of the owner for whom all NFTs are returned
-   
-    - `callback` : Callback function returns nft `data` and `error` if there is any
+   findAllByOwner method takes two arguments :
 
-    ```js
-    metaplex.findAllByOwner(ownerPublicKey, (data, error) => console.log(data, error));
-    ```
+   - `ownerPublicKey` : It is the public key of the owner for whom all NFTs are returned
+
+   - `callback` : Callback function returns nft `data` and `error` if there is any
+
+   ```js
+   metaplex.findAllByOwner(ownerPublicKey, (data, error) =>
+     console.log(data, error),
+   );
+   ```
 
 ## Next Steps
 
 As mentioned above, this SDK is still in very early stages. We plan to bridge the complete mobile SDK of Metaplex. Here’s a quick overview of what we plan to work on next.
 
 - Bridge existing functionalities from android and ios native sdk
-

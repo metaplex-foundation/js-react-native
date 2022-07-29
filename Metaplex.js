@@ -8,15 +8,26 @@ class MetaplexBridge {
     Metaplex.create(environment, ownerPublicKey);
   }
 
-  findByMint(mintKey, callback) {
+  findByMint(mintKey) {
     // find nft metadata for given mint key
     // callback function returns the data returned
-    Metaplex.findByMint(mintKey, (data, error) => callback(data, error));
+    const promise = new Promise((resolve, reject) => {
+      Metaplex.findByMint(mintKey, (data, error) => {
+        if (error) {
+          reject(error);
+        }
+        resolve(data);
+      });
+    });
+
+    return promise;
   }
 
-  findAllByOwner(ownerPublicKey, callback){
+  findAllByOwner(ownerPublicKey, callback) {
     // find all nfts by a given owner public key
-    Metaplex.findAllByOwner(ownerPublicKey, (data, error) => callback(data, error));
+    Metaplex.findAllByOwner(ownerPublicKey, (data, error) =>
+      callback(data, error),
+    );
   }
 }
 

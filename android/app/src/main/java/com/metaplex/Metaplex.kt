@@ -4,10 +4,6 @@ import com.facebook.react.bridge.*
 import com.metaplex.lib.Metaplex
 import com.metaplex.lib.drivers.indenty.ReadOnlyIdentityDriver
 import com.metaplex.lib.drivers.storage.OkHttpSharedStorageDriver
-import com.metaplex.lib.modules.nfts.models.NFT
-import com.metaplex.lib.programs.token_metadata.MasterEditionAccount
-import com.metaplex.lib.programs.token_metadata.accounts.MetadataAccount
-import com.metaplex.lib.programs.token_metadata.accounts.MetaplexCreator
 import com.metaplex.lib.solana.SolanaConnectionDriver
 import com.solana.core.PublicKey
 import com.solana.networking.RPCEndpoint
@@ -45,17 +41,17 @@ class Metaplex(reactContext: ReactApplicationContext) : ReactContextBaseJavaModu
         }
         metaplex?.nft?.findByMint(PublicKey(mintKey)) {
             it.onSuccess {
-                metaplex?.let { it1 ->
-                    it.metadata(it1) { result ->
-                        result.onSuccess {
-                            callback.invoke(it.toString(), null)
-                        }.onFailure {
-                            callback.invoke(null, it.message)
+                metaplex?.let { nft ->
+                    it.metadata(nft) { result ->
+                        result.onSuccess { metadata ->
+                            callback.invoke(Provider.convertMetadataToObject(metadata), null)
+                        }.onFailure { error ->
+                            callback.invoke(null, error.message)
                         }
                     }
                 }
-            }.onFailure {
-                callback.invoke(null, it.message)
+            }.onFailure { error ->
+                callback.invoke(null, error.message)
             }
         }
     }
@@ -68,10 +64,10 @@ class Metaplex(reactContext: ReactApplicationContext) : ReactContextBaseJavaModu
         }
         metaplex?.nft?.findAllByOwner(PublicKey(ownerPublicKey)){ it ->
             it.onSuccess { nfts ->
-                var nftList = nfts.filterNotNull();
+                val nftList = nfts.filterNotNull()
                 val mappedNftList: WritableArray = WritableNativeArray()
                 for(nft in nftList){
-                    mappedNftList.pushMap(Provider.convertNftToObject(nft));
+                    mappedNftList.pushMap(Provider.convertNftToObject(nft))
                 }
                 callback.invoke(mappedNftList, null);
             }.onFailure {

@@ -33,10 +33,10 @@ const metaplex = new Metaplex(
   'EAqjUWVX2m9fdfGNBzTY5zSiid1Sb9V3x6EL8ssZBTkw',
 );
 
-metaplex.findByMint(
-  'HfUXV9jP7qwMBKSvyoQDYEyZpPVSfteysS62DBpGNSqz',
-  (data, error) => console.log(data, error),
-);
+metaplex
+  .findByMint('HfUXV9jP7qwMBKSvyoQDYEyZpPVSfteysS62DBpGNSqz')
+  .then(data => console.log(data))
+  .catch(error => console.log(error));
 
 metaplex.findAllByOwner(
   'EAqjUWVX2m9fdfGNBzTY5zSiid1Sb9V3x6EL8ssZBTkw',
