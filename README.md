@@ -71,16 +71,15 @@ Check out [`Metaplex.js`](./Metaplex.js) file for code samples of following meth
 
 2. **findAllByOwner**
 
-   findAllByOwner method takes two arguments :
+   findAllByOwner method takes one argument and returns a promise :
 
    - `ownerPublicKey` : It is the public key of the owner for whom all NFTs are returned
 
-   - `callback` : Callback function returns nft `data` and `error` if there is any
-
    ```js
-   metaplex.findAllByOwner(ownerPublicKey, (data, error) =>
-     console.log(data, error),
-   );
+   metaplex
+     .findAllByOwner(ownerPublicKey)
+     .then(data => console.log(data))
+     .catch(error => console.log(error));
    ```
 
 ## Next Steps

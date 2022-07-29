@@ -23,11 +23,18 @@ class MetaplexBridge {
     return promise;
   }
 
-  findAllByOwner(ownerPublicKey, callback) {
+  findAllByOwner(ownerPublicKey) {
     // find all nfts by a given owner public key
-    Metaplex.findAllByOwner(ownerPublicKey, (data, error) =>
-      callback(data, error),
-    );
+    const promise = new Promise((resolve, reject) => {
+      Metaplex.findAllByOwner(ownerPublicKey, (data, error) => {
+        if (error) {
+          reject(error);
+        }
+        resolve(data);
+      });
+    });
+
+    return promise;
   }
 }
 

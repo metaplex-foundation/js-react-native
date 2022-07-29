@@ -38,10 +38,10 @@ metaplex
   .then(data => console.log(data))
   .catch(error => console.log(error));
 
-metaplex.findAllByOwner(
-  'EAqjUWVX2m9fdfGNBzTY5zSiid1Sb9V3x6EL8ssZBTkw',
-  (data, error) => console.log(data, error),
-);
+metaplex
+  .findAllByOwner('EAqjUWVX2m9fdfGNBzTY5zSiid1Sb9V3x6EL8ssZBTkw')
+  .then(data => console.log(data))
+  .catch(error => console.log(error));
 
 const Section = ({children, title}): Node => {
   const isDarkMode = useColorScheme() === 'dark';
