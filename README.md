@@ -8,6 +8,7 @@ Currently bridge for following methods from Android SDK have been implemented:
 
 - `findByMint`
 - `findAllByOwner`
+- `metadata`
 
 ## Usage
 
@@ -60,13 +61,13 @@ Check out [`Metaplex.js`](./Metaplex.js) file for code samples of following meth
 
    findByMint method takes one argument and returns a promise :
 
-   - `mintKey` : It is the mint key for which nft data is to be found
+   - `mintKey` : It is the mint key for which nft is to be found
 
    ```js
    metaplex
-     .findByMint(mintKey)
-     .then(data => console.log(data))
-     .catch(error => console.log(error));
+   .findByMint(mintKey)
+   .then(data => console.log(data))
+   .catch(error => console.log(error));
    ```
 
 2. **findAllByOwner**
@@ -78,6 +79,19 @@ Check out [`Metaplex.js`](./Metaplex.js) file for code samples of following meth
    ```js
    metaplex
      .findAllByOwner(ownerPublicKey)
+     .then(data => console.log(data))
+     .catch(error => console.log(error));
+   ```
+
+3. **metadata**
+
+   metadata method takes one argument and returns a promise :
+
+   - `mintKey` : It is the mint key for which nft metadata is to be found
+
+   ```js
+   metaplex
+     .metadata(mintKey)
      .then(data => console.log(data))
      .catch(error => console.log(error));
    ```

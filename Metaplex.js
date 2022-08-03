@@ -9,8 +9,7 @@ class MetaplexBridge {
   }
 
   findByMint(mintKey) {
-    // find nft metadata for given mint key
-    // callback function returns the data returned
+    // finds nft for given mint key
     const promise = new Promise((resolve, reject) => {
       Metaplex.findByMint(mintKey, (data, error) => {
         if (error) {
@@ -27,6 +26,20 @@ class MetaplexBridge {
     // find all nfts by a given owner public key
     const promise = new Promise((resolve, reject) => {
       Metaplex.findAllByOwner(ownerPublicKey, (data, error) => {
+        if (error) {
+          reject(error);
+        }
+        resolve(data);
+      });
+    });
+
+    return promise;
+  }
+
+  metadata(mintKey) {
+    // finds nft metadata for given mint key
+    const promise = new Promise((resolve, reject) => {
+      Metaplex.metadata(mintKey, (data, error) => {
         if (error) {
           reject(error);
         }
