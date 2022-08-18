@@ -14,7 +14,7 @@ import NftCard from '../components/NftCard';
 const HomeScreen = () => {
   const metaplex = new Metaplex(
     'devnet',
-    'B1AfN7AgpMyctfFbjmvRAvE1yziZFDb9XCwydBjJwtRN',
+    'CN87nZuhnFdz74S9zn3bxCcd5ZxW55nwvgAv5C2Tz3K7',
   );
 
   const [nftList, setNftList] = useState([]);
@@ -22,7 +22,7 @@ const HomeScreen = () => {
   useEffect(() => {
     const execute = async () => {
       await metaplex
-        .findAllByOwner('B1AfN7AgpMyctfFbjmvRAvE1yziZFDb9XCwydBjJwtRN')
+        .findAllByOwner('CN87nZuhnFdz74S9zn3bxCcd5ZxW55nwvgAv5C2Tz3K7')
         .then(async data => {
           const newList = data
             .map((item, index) => ({
