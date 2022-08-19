@@ -40,16 +40,8 @@ class Metaplex(reactContext: ReactApplicationContext) : ReactContextBaseJavaModu
             return
         }
         metaplex?.nft?.findByMint(PublicKey(mintKey)) {
-            it.onSuccess {
-                metaplex?.let { nft ->
-                    it.metadata(nft) { result ->
-                        result.onSuccess { metadata ->
-                            callback.invoke(Provider.convertMetadataToObject(metadata), null)
-                        }.onFailure { error ->
-                            callback.invoke(null, error.message)
-                        }
-                    }
-                }
+            it.onSuccess { nft ->
+                callback.invoke(Provider.convertNftToObject(nft), null);
             }.onFailure { error ->
                 callback.invoke(null, error.message)
             }
@@ -72,6 +64,29 @@ class Metaplex(reactContext: ReactApplicationContext) : ReactContextBaseJavaModu
                 callback.invoke(mappedNftList, null);
             }.onFailure {
                 callback.invoke(null, it.message)
+            }
+        }
+    }
+
+    @ReactMethod
+    fun metadata(mintKey: String, callback: Callback) {
+        if(metaplex == null) {
+            callback.invoke(null, "create method is not called before")
+            return
+        }
+        metaplex?.nft?.findByMint(PublicKey(mintKey)) {
+            it.onSuccess {
+                metaplex?.let { nft ->
+                    it.metadata(nft) { result ->
+                        result.onSuccess { metadata ->
+                            callback.invoke(Provider.convertMetadataToObject(metadata), null)
+                        }.onFailure { error ->
+                            callback.invoke(null, error.message)
+                        }
+                    }
+                }
+            }.onFailure { error ->
+                callback.invoke(null, error.message)
             }
         }
     }
