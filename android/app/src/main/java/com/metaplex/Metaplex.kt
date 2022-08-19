@@ -23,6 +23,9 @@ class Metaplex(reactContext: ReactApplicationContext) : ReactContextBaseJavaModu
             "testnet" -> {
                 RPCEndpoint.testnetSolana;
             }
+            "mainnet" -> {
+                RPCEndpoint.mainnetBetaSolana;
+            }
             else -> {
                 RPCEndpoint.mainnetBetaSolana;
             }
